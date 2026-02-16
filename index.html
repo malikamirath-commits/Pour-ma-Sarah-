@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pour Toi 💖</title>
+
+<link href="https://fonts.googleapis.com" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:Poppins, sans-serif;
+    text-align:center;
+    color:#fff;
+    /* Image optimisée */
+    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), 
+                url("https://images.unsplash.com") center/cover fixed;
+    overflow-x:hidden;
+    min-height: 100vh;
+}
+
+h1{
+    margin-top:60px;
+    font-family:"Playfair Display", serif;
+    font-size:45px;
+    color:#ffd6ec;
+    text-shadow:0 0 15px rgba(255,182,193,.8);
+}
+
+#login-zone { transition: 0.5s; }
+
+input{
+    padding:14px;
+    border-radius:30px;
+    border:none;
+    outline:none;
+    width:250px;
+    text-align:center;
+    margin-top:25px;
+    font-size:16px;
+}
+
+button{
+    padding:15px 35px;
+    border:none;
+    border-radius:40px;
+    margin-top:20px;
+    font-size:18px;
+    background:linear-gradient(45deg,#ff4da6,#ff85c1);
+    color:white;
+    cursor:pointer;
+    box-shadow:0 0 20px rgba(255,105,180,.6);
+    transition:.3s;
+}
+
+button:hover{ transform:scale(1.05); }
+
+.envelope{
+    font-size:95px;
+    margin-top:40px;
+    cursor:pointer;
+    transition:.8s;
+    display: inline-block;
+}
+
+.envelope.open{ transform:rotateX(180deg) scale(1.1); opacity: 0; height: 0; }
+
+.hidden{ display:none !important; }
+
+.letter{
+    display:none;
+    margin:20px auto;
+    max-width:90%;
+    width: 500px;
+    background:white;
+    color:#444;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 0 40px rgba(255,192,203,.6);
+    transform:scaleY(0);
+    transform-origin:top;
+    animation:openLetter 1.5s forwards;
+}
+
+@keyframes openLetter{ to{transform:scaleY(1)} }
+
+.letter h2{ font-family:"Playfair Display"; color:#ff4da6; }
+
+.signature{ text-align:right; margin-top:35px; font-size:22px; color:#ff4da6; }
+
+.heart{
+    position:fixed;
+    bottom:-20px;
+    font-size:22px;
+    animation:float linear forwards;
+    z-index: 10;
+}
+
+@keyframes float{ to{ transform:translateY(-120vh) rotate(360deg); opacity:0; } }
+
+iframe { margin-top:20px; border-radius:15px; border: none; }
+</style>
+</head>
+
+<body>
+
+<div id="login-zone">
+    <h1>Ma Valentine 💖</h1>
+    <p>Entre le mot secret pour ouvrir ton message...</p>
+    <input type="password" id="pass" placeholder="Mot secret">
+    <br>
+    <button onclick="check()">Ouvrir 💕</button>
+</div>
+
+<div id="env" class="envelope hidden" onclick="openLetter()">💌</div>
+
+<div id="letter" class="letter">
+    <h2>À ma Sarah, ma princesse 💗</h2>
+    <p>Depuis que je t’ai rencontrée, ma vie est devenue plus douce.<br>
+    Ton existence est un cadeau, ton sourire une lumière, et ton cœur un refuge.</p>
+    <p>Peu importe les épreuves, les distances ou le temps, je serai toujours là pour toi.</p>
+    <p>Je t’aime plus que les mots ne pourront jamais l’expliquer.</p>
+    <p><b>Pour toujours et à jamais.</b></p>
+
+    <div class="signature">Avec tout mon amour,<br>Amirath 💕</div>
+
+    <div id="music-container"></div>
+</div>
+
+<script>
+const secret = "sarah2026";
+
+function check(){
+    if(document.getElementById("pass").value.toLowerCase() === secret) {
+        document.getElementById("login-zone").classList.add("hidden");
+        document.getElementById("env").classList.remove("hidden");
+    } else {
+        alert("Mot secret incorrect 💔");
+    }
+}
+
+function openLetter(){
+    document.getElementById("env").classList.add("open");
+    setTimeout(() => {
+        document.getElementById("env").classList.add("hidden");
+        const letter = document.getElementById("letter");
+        letter.style.display = "block";
+        
+        // Ajout de la musique au moment de l'ouverture (meilleure compatibilité)
+        document.getElementById("music-container").innerHTML = `
+            <p style="font-size:12px; margin-top:20px;">Musique — Namiko 🎵</p>
+            <iframe width="100%" height="80" 
+            src="https://www.youtube.com" 
+            allow="autoplay"></iframe>`;
+    }, 600);
+}
+
+function heart(){
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
+}
+setInterval(heart, 400);
+</script>
+
+</body>
+  </html>
+  
